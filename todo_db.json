@@ -1,106 +1,140 @@
 [{
     "id": 1,
-    "msg": "Patriots Path, Mendham, NJ 07945, USA"
+    "msg": "Patriots Path, Mendham, NJ 07945, USA",
+    "mode": 1
 }, {
     "id": 2,
-    "msg": "101 New Jersey 10, Whippany, NJ 07981, USA"
+    "msg": "101 New Jersey 10, Whippany, NJ 07981, USA",
+    "mode": 1
 }, {
     "id": 3,
-    "msg": "U.S. 6, Shohola, PA 18458, USA"
+    "msg": "U.S. 6, Shohola, PA 18458, USA",
+    "mode": 1
 }, {
     "id": 4,
-    "msg": "5 Conners Road, Kingston, NY 12401, USA"
+    "msg": "5 Conners Road, Kingston, NY 12401, USA",
+    "mode": 1
 }, {
     "id": 5,
-    "msg": "Mid Hudson Psychiatric Center, New Hampton, NY 10958, USA"
+    "msg": "Mid Hudson Psychiatric Center, New Hampton, NY 10958, USA",
+    "mode": 1
 }, {
     "id": 6,
-    "msg": "287 Flugertown Road, Livingston Manor, NY 12758, USA"
+    "msg": "287 Flugertown Road, Livingston Manor, NY 12758, USA",
+    "mode": 1
 }, {
     "id": 7,
-    "msg": "4001 Tremley Point Road, Linden, NJ 07036, USA"
+    "msg": "4001 Tremley Point Road, Linden, NJ 07036, USA",
+    "mode": 1
 }, {
     "id": 8,
-    "msg": "352 South Mountain Road, Wallkill, NY 12589, USA"
+    "msg": "352 South Mountain Road, Wallkill, NY 12589, USA",
+    "mode": 1
 }, {
     "id": 9,
-    "msg": "Bailey Turn Road, Harriman, NY 10926, USA"
+    "msg": "Bailey Turn Road, Harriman, NY 10926, USA",
+    "mode": 1
 }, {
     "id": 10,
-    "msg": "193-199 Wawayanda Road, Hewitt, NJ 07421, USA"
+    "msg": "193-199 Wawayanda Road, Hewitt, NJ 07421, USA",
+    "mode": 1
 }, {
     "id": 11,
-    "msg": "406-496 Ward Avenue, Pine Bush, NY 12566, USA"
+    "msg": "406-496 Ward Avenue, Pine Bush, NY 12566, USA",
+    "mode": 1
 }, {
     "id": 12,
-    "msg": "162 Merrill Road, Highland Mills, NY 10930, USA"
+    "msg": "162 Merrill Road, Highland Mills, NY 10930, USA",
+    "mode": 1
 }, {
     "id": 13,
-    "msg": "Clinton Road, West Milford, NJ 07480, USA"
+    "msg": "Clinton Road, West Milford, NJ 07480, USA",
+    "mode": 1
 }, {
     "id": 14,
-    "msg": "16 Old Brook Lane, Warwick, NY 10990, USA"
+    "msg": "16 Old Brook Lane, Warwick, NY 10990, USA",
+    "mode": 1
 }, {
     "id": 15,
-    "msg": "3 Drake Lane, Pennington, NJ 08534, USA"
+    "msg": "3 Drake Lane, Pennington, NJ 08534, USA",
+    "mode": 1
 }, {
     "id": 16,
-    "msg": "6324 8th Avenue, Brooklyn, NY 11220, USA"
+    "msg": "6324 8th Avenue, Brooklyn, NY 11220, USA",
+    "mode": 1
 }, {
     "id": 17,
-    "msg": "1 Merck Access Road, Whitehouse Station, NJ 08889, USA"
+    "msg": "1 Merck Access Road, Whitehouse Station, NJ 08889, USA",
+    "mode": 1
 }, {
     "id": 18,
-    "msg": "78-98 Schalck Road, Narrowsburg, NY 12764, USA"
+    "msg": "78-98 Schalck Road, Narrowsburg, NY 12764, USA",
+    "mode": 1
 }, {
     "id": 19,
-    "msg": "282 Lakeview Drive Road, Highland Lake, NY 12743, USA"
+    "msg": "282 Lakeview Drive Road, Highland Lake, NY 12743, USA",
+    "mode": 1
 }, {
     "id": 20,
-    "msg": "330 Evelyn Avenue, Hamilton Township, NJ 08619, USA"
+    "msg": "330 Evelyn Avenue, Hamilton Township, NJ 08619, USA",
+    "mode": 1
 }, {
     "id": 21,
-    "msg": "New York State Reference Route 987E, Southfields, NY 10975, USA"
+    "msg": "New York State Reference Route 987E, Southfields, NY 10975, USA",
+    "mode": 1
 }, {
     "id": 22,
-    "msg": "103-271 Tempaloni Road, Ellenville, NY 12428, USA"
+    "msg": "103-271 Tempaloni Road, Ellenville, NY 12428, USA",
+    "mode": 1
 }, {
     "id": 23,
-    "msg": "1300 Airport Road, North Brunswick Township, NJ 08902, USA"
+    "msg": "1300 Airport Road, North Brunswick Township, NJ 08902, USA",
+    "mode": 1
 }, {
     "id": 24,
-    "msg": ""
+    "msg": "",
+    "mode": 1
 }, {
     "id": 25,
-    "msg": ""
+    "msg": "",
+    "mode": 1
 }, {
     "id": 26,
-    "msg": ""
+    "msg": "",
+    "mode": 1
 }, {
     "id": 27,
-    "msg": ""
+    "msg": "",
+    "mode": 1
 }, {
     "id": 28,
-    "msg": "211-225 Plains Road, Augusta, NJ 07822, USA"
+    "msg": "211-225 Plains Road, Augusta, NJ 07822, USA",
+    "mode": 1
 }, {
     "id": 29,
-    "msg": ""
+    "msg": "",
+    "mode": 1
 }, {
     "id": 30,
-    "msg": "165 Pedersen Ridge Road, Milford, PA 18337, USA"
+    "msg": "165 Pedersen Ridge Road, Milford, PA 18337, USA",
+    "mode": 1
 }, {
     "id": 31,
-    "msg": "100-122 Locktown Road, Frenchtown, NJ 08825, USA"
+    "msg": "100-122 Locktown Road, Frenchtown, NJ 08825, USA",
+    "mode": 1
 }, {
     "id": 32,
     "msg": ""
 }, {
     "id": 33,
-    "msg": "650-652 Willi Hill Road, Swan Lake, NY 12783, USA"
+    "msg": "650-652 Willi Hill Road, Swan Lake, NY 12783, USA",
+    "mode": 1
 }, {
     "id": 34,
-    "msg": "26 East 3rd Street, New Providence, NJ 07974, USA"
+    "msg": "26 East 3rd Street, New Providence, NJ 07974, USA",
+    "mode": 1
 }, {
     "id": 35,
-    "msg": "3 Hasta Way, Newton, NJ 07860, USA"
+    "msg": "3 Hasta Way, Newton, NJ 07860, USA",
+    "mode": 1
 }]

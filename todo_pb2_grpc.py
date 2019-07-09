@@ -24,6 +24,11 @@ class RouteGuideStub(object):
         request_serializer=todo__pb2.Mode.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
+    self.AddTodo = channel.unary_stream(
+        '/RouteGuide/AddTodo',
+        request_serializer=todo__pb2.Todo.SerializeToString,
+        response_deserializer=todo__pb2.Todo.FromString,
+        )
 
 
 class RouteGuideServicer(object):
@@ -44,6 +49,13 @@ class RouteGuideServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def AddTodo(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_RouteGuideServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -55,6 +67,11 @@ def add_RouteGuideServicer_to_server(servicer, server):
       'ListTodos': grpc.unary_stream_rpc_method_handler(
           servicer.ListTodos,
           request_deserializer=todo__pb2.Mode.FromString,
+          response_serializer=todo__pb2.Todo.SerializeToString,
+      ),
+      'AddTodo': grpc.unary_stream_rpc_method_handler(
+          servicer.AddTodo,
+          request_deserializer=todo__pb2.Todo.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
   }

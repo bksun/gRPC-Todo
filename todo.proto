@@ -4,6 +4,7 @@ syntax = "proto3";
 service RouteGuide {
     rpc GetTodo(TodoCode) returns (Todo) {}
     rpc ListTodos(Mode) returns (stream Todo) {}
+    rpc AddTodo(Todo) returns (stream Todo) {}
     // rpc RecordRoute(stream Point) returns (RouteSummary) {}
     // rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
 }
@@ -13,7 +14,7 @@ message Mode {
       COMPLETED = 0;
       YETTODO   = 1;
     }
-    State todo_mode = 1;
+    State id = 1;
 }
 
 message TodoCode {

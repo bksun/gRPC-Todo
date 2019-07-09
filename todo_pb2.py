@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\ntodo.proto\"K\n\x04Mode\x12\x1e\n\ttodo_mode\x18\x01 \x01(\x0e\x32\x0b.Mode.State\"#\n\x05State\x12\r\n\tCOMPLETED\x10\x00\x12\x0b\n\x07YETTODO\x10\x01\"\x16\n\x08TodoCode\x12\n\n\x02id\x18\x01 \x01(\x05\"*\n\x04Todo\x12\x15\n\x02id\x18\x01 \x01(\x0b\x32\t.TodoCode\x12\x0b\n\x03msg\x18\x02 \x01(\t2J\n\nRouteGuide\x12\x1d\n\x07GetTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x12\x1d\n\tListTodos\x12\x05.Mode\x1a\x05.Todo\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\ntodo.proto\"D\n\x04Mode\x12\x17\n\x02id\x18\x01 \x01(\x0e\x32\x0b.Mode.State\"#\n\x05State\x12\r\n\tCOMPLETED\x10\x00\x12\x0b\n\x07YETTODO\x10\x01\"\x16\n\x08TodoCode\x12\n\n\x02id\x18\x01 \x01(\x05\"*\n\x04Todo\x12\x15\n\x02id\x18\x01 \x01(\x0b\x32\t.TodoCode\x12\x0b\n\x03msg\x18\x02 \x01(\t2g\n\nRouteGuide\x12\x1d\n\x07GetTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x12\x1d\n\tListTodos\x12\x05.Mode\x1a\x05.Todo\"\x00\x30\x01\x12\x1b\n\x07\x41\x64\x64Todo\x12\x05.Todo\x1a\x05.Todo\"\x00\x30\x01\x62\x06proto3')
 )
 
 
@@ -42,8 +42,8 @@ _MODE_STATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=54,
-  serialized_end=89,
+  serialized_start=47,
+  serialized_end=82,
 )
 _sym_db.RegisterEnumDescriptor(_MODE_STATE)
 
@@ -56,7 +56,7 @@ _MODE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='todo_mode', full_name='Mode.todo_mode', index=0,
+      name='id', full_name='Mode.id', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -76,7 +76,7 @@ _MODE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=89,
+  serialized_end=82,
 )
 
 
@@ -106,8 +106,8 @@ _TODOCODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=91,
-  serialized_end=113,
+  serialized_start=84,
+  serialized_end=106,
 )
 
 
@@ -144,11 +144,11 @@ _TODO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=115,
-  serialized_end=157,
+  serialized_start=108,
+  serialized_end=150,
 )
 
-_MODE.fields_by_name['todo_mode'].enum_type = _MODE_STATE
+_MODE.fields_by_name['id'].enum_type = _MODE_STATE
 _MODE_STATE.containing_type = _MODE
 _TODO.fields_by_name['id'].message_type = _TODOCODE
 DESCRIPTOR.message_types_by_name['Mode'] = _MODE
@@ -185,8 +185,8 @@ _ROUTEGUIDE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=159,
-  serialized_end=233,
+  serialized_start=152,
+  serialized_end=255,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetTodo',
@@ -203,6 +203,15 @@ _ROUTEGUIDE = _descriptor.ServiceDescriptor(
     index=1,
     containing_service=None,
     input_type=_MODE,
+    output_type=_TODO,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='AddTodo',
+    full_name='RouteGuide.AddTodo',
+    index=2,
+    containing_service=None,
+    input_type=_TODO,
     output_type=_TODO,
     serialized_options=None,
   ),

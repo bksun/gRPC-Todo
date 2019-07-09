@@ -30,6 +30,14 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
         else:
             return todo
 
+    def AddTodo(self, request, context):
+        print('Server - Get Todo called..')
+        # todo = get_todo(self.db, request)
+        self.db.append(request)
+        print('Server - Addtodo - req:', request)
+        for feature in self.db:
+                yield feature
+
     def ListTodos(self, request, context):
 
         for feature in self.db:
