@@ -5,6 +5,7 @@ service RouteGuide {
     rpc GetTodo(TodoCode) returns (Todo) {}
     rpc ListTodos(Mode) returns (stream Todo) {}
     rpc AddTodo(Todo) returns (stream Todo) {}
+    rpc RemoveTodo(TodoCode) returns (stream Todo) {}
     // rpc RecordRoute(stream Point) returns (RouteSummary) {}
     // rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
 }

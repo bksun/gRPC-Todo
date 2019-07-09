@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\ntodo.proto\"D\n\x04Mode\x12\x17\n\x02id\x18\x01 \x01(\x0e\x32\x0b.Mode.State\"#\n\x05State\x12\r\n\tCOMPLETED\x10\x00\x12\x0b\n\x07YETTODO\x10\x01\"\x16\n\x08TodoCode\x12\n\n\x02id\x18\x01 \x01(\x05\"*\n\x04Todo\x12\x15\n\x02id\x18\x01 \x01(\x0b\x32\t.TodoCode\x12\x0b\n\x03msg\x18\x02 \x01(\t2g\n\nRouteGuide\x12\x1d\n\x07GetTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x12\x1d\n\tListTodos\x12\x05.Mode\x1a\x05.Todo\"\x00\x30\x01\x12\x1b\n\x07\x41\x64\x64Todo\x12\x05.Todo\x1a\x05.Todo\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\ntodo.proto\"D\n\x04Mode\x12\x17\n\x02id\x18\x01 \x01(\x0e\x32\x0b.Mode.State\"#\n\x05State\x12\r\n\tCOMPLETED\x10\x00\x12\x0b\n\x07YETTODO\x10\x01\"\x16\n\x08TodoCode\x12\n\n\x02id\x18\x01 \x01(\x05\"*\n\x04Todo\x12\x15\n\x02id\x18\x01 \x01(\x0b\x32\t.TodoCode\x12\x0b\n\x03msg\x18\x02 \x01(\t2\x8b\x01\n\nRouteGuide\x12\x1d\n\x07GetTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x12\x1d\n\tListTodos\x12\x05.Mode\x1a\x05.Todo\"\x00\x30\x01\x12\x1b\n\x07\x41\x64\x64Todo\x12\x05.Todo\x1a\x05.Todo\"\x00\x30\x01\x12\"\n\nRemoveTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x30\x01\x62\x06proto3')
 )
 
 
@@ -185,8 +185,8 @@ _ROUTEGUIDE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=152,
-  serialized_end=255,
+  serialized_start=153,
+  serialized_end=292,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetTodo',
@@ -212,6 +212,15 @@ _ROUTEGUIDE = _descriptor.ServiceDescriptor(
     index=2,
     containing_service=None,
     input_type=_TODO,
+    output_type=_TODO,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RemoveTodo',
+    full_name='RouteGuide.RemoveTodo',
+    index=3,
+    containing_service=None,
+    input_type=_TODOCODE,
     output_type=_TODO,
     serialized_options=None,
   ),

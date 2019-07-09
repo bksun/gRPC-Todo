@@ -21,7 +21,7 @@ def run():
         print("-------------- Add todos --------------")
         Add_one_todo(stub)
         print("-------------- Gettodo --------------")
-        guide_get_todo(stub)
+        remove_one_todo(stub)
         # print("-------------- RecordRoute --------------")
         # guide_record_route(stub)
         # print("-------------- RouteChat --------------")

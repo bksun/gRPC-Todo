@@ -23,7 +23,7 @@ def Add_one_todo(stub):
         id=todo_pb2.TodoCode(id=200),
         msg="my latest message"
     ))
-    
+
     print('Client - Post call over..')
     for todo in todos:
         print("todo: ", todo)
@@ -37,6 +37,11 @@ def Add_one_todo(stub):
     # else:
     #     print("Found no todo at %s" % todo.id)
 
+def remove_one_todo(stub):
+    todos = stub.RemoveTodo(todo_pb2.TodoCode(id=31))
+    print('Printing todos after removal...')
+    for todo in todos:
+        print("todo: ", todo)
 
 def guide_get_one_todo(stub, point):
     print('Client - Ready for GetTodo called..')
