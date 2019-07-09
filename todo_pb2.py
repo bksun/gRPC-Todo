@@ -20,10 +20,64 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\ntodo.proto\"\x16\n\x08TodoCode\x12\n\n\x02id\x18\x01 \x01(\x05\"*\n\x04Todo\x12\x15\n\x02id\x18\x01 \x01(\x0b\x32\t.TodoCode\x12\x0b\n\x03msg\x18\x02 \x01(\t2N\n\nRouteGuide\x12\x1d\n\x07GetTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x12!\n\tListTodos\x12\t.TodoCode\x1a\x05.Todo\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\ntodo.proto\"K\n\x04Mode\x12\x1e\n\ttodo_mode\x18\x01 \x01(\x0e\x32\x0b.Mode.State\"#\n\x05State\x12\r\n\tCOMPLETED\x10\x00\x12\x0b\n\x07YETTODO\x10\x01\"\x16\n\x08TodoCode\x12\n\n\x02id\x18\x01 \x01(\x05\"*\n\x04Todo\x12\x15\n\x02id\x18\x01 \x01(\x0b\x32\t.TodoCode\x12\x0b\n\x03msg\x18\x02 \x01(\t2J\n\nRouteGuide\x12\x1d\n\x07GetTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x12\x1d\n\tListTodos\x12\x05.Mode\x1a\x05.Todo\"\x00\x30\x01\x62\x06proto3')
 )
 
 
+
+_MODE_STATE = _descriptor.EnumDescriptor(
+  name='State',
+  full_name='Mode.State',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='COMPLETED', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='YETTODO', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=54,
+  serialized_end=89,
+)
+_sym_db.RegisterEnumDescriptor(_MODE_STATE)
+
+
+_MODE = _descriptor.Descriptor(
+  name='Mode',
+  full_name='Mode',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='todo_mode', full_name='Mode.todo_mode', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _MODE_STATE,
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14,
+  serialized_end=89,
+)
 
 
 _TODOCODE = _descriptor.Descriptor(
@@ -52,8 +106,8 @@ _TODOCODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14,
-  serialized_end=36,
+  serialized_start=91,
+  serialized_end=113,
 )
 
 
@@ -90,14 +144,24 @@ _TODO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=38,
-  serialized_end=80,
+  serialized_start=115,
+  serialized_end=157,
 )
 
+_MODE.fields_by_name['todo_mode'].enum_type = _MODE_STATE
+_MODE_STATE.containing_type = _MODE
 _TODO.fields_by_name['id'].message_type = _TODOCODE
+DESCRIPTOR.message_types_by_name['Mode'] = _MODE
 DESCRIPTOR.message_types_by_name['TodoCode'] = _TODOCODE
 DESCRIPTOR.message_types_by_name['Todo'] = _TODO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+Mode = _reflection.GeneratedProtocolMessageType('Mode', (_message.Message,), {
+  'DESCRIPTOR' : _MODE,
+  '__module__' : 'todo_pb2'
+  # @@protoc_insertion_point(class_scope:Mode)
+  })
+_sym_db.RegisterMessage(Mode)
 
 TodoCode = _reflection.GeneratedProtocolMessageType('TodoCode', (_message.Message,), {
   'DESCRIPTOR' : _TODOCODE,
@@ -121,8 +185,8 @@ _ROUTEGUIDE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=82,
-  serialized_end=160,
+  serialized_start=159,
+  serialized_end=233,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetTodo',
@@ -138,7 +202,7 @@ _ROUTEGUIDE = _descriptor.ServiceDescriptor(
     full_name='RouteGuide.ListTodos',
     index=1,
     containing_service=None,
-    input_type=_TODOCODE,
+    input_type=_MODE,
     output_type=_TODO,
     serialized_options=None,
   ),

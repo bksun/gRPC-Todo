@@ -21,7 +21,7 @@ class RouteGuideStub(object):
         )
     self.ListTodos = channel.unary_stream(
         '/RouteGuide/ListTodos',
-        request_serializer=todo__pb2.TodoCode.SerializeToString,
+        request_serializer=todo__pb2.Mode.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
 
@@ -54,7 +54,7 @@ def add_RouteGuideServicer_to_server(servicer, server):
       ),
       'ListTodos': grpc.unary_stream_rpc_method_handler(
           servicer.ListTodos,
-          request_deserializer=todo__pb2.TodoCode.FromString,
+          request_deserializer=todo__pb2.Mode.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
   }

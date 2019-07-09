@@ -29,3 +29,12 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
             return todo_pb2.Todo(msg="", id=request)
         else:
             return todo
+
+    def ListTodos(self, request, context):
+
+        for feature in self.db:
+            # if (feature.location.longitude >= left and
+            #         feature.location.longitude <= right and
+            #         feature.location.latitude >= bottom and
+            #         feature.location.latitude <= top):
+                yield feature

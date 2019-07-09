@@ -3,9 +3,17 @@ syntax = "proto3";
 
 service RouteGuide {
     rpc GetTodo(TodoCode) returns (Todo) {}
-    rpc ListTodos(TodoCode) returns (stream Todo) {}
+    rpc ListTodos(Mode) returns (stream Todo) {}
     // rpc RecordRoute(stream Point) returns (RouteSummary) {}
     // rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
+}
+
+message Mode {
+    enum State {
+      COMPLETED = 0;
+      YETTODO   = 1;
+    }
+    State todo_mode = 1;
 }
 
 message TodoCode {

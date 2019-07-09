@@ -5,11 +5,14 @@ import grpc
 import todo_pb2
 import todo_pb2_grpc
 import todo_resources
-# def make_route_note(message, latitude, longitude):
-#     return todo_pb2.RouteNote(
-#         message=message,
-#         location=todo_pb2.Point(latitude=latitude, longitude=longitude))
 
+def guide_list_todos(stub):
+    list_todos = todo_pb2.Mode(todo_mode = 1)
+    
+    todos = stub.ListTodos(list_todos)
+
+    for todo in todos:
+        print("todo called %s at %s" % (todo.id, todo.msg))
 
 def guide_get_one_todo(stub, point):
     print('Client - Ready for GetTodo called..')
