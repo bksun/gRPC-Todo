@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+
+service RouteGuide {
+    rpc GetFeature(TodoCode) returns (Todo) {}
+    rpc ListFeatures(TodoCode) returns (stream Todo) {}
+    // rpc RecordRoute(stream Point) returns (RouteSummary) {}
+    // rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
+}
+
+message TodoCode {
+    int32 id = 1;
+}
+
+message Todo {
+    TodoCode id = 1;
+    string msg = 2;
+}
