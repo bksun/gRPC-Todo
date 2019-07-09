@@ -2,8 +2,8 @@ syntax = "proto3";
 
 
 service RouteGuide {
-    rpc GetFeature(TodoCode) returns (Todo) {}
-    rpc ListFeatures(TodoCode) returns (stream Todo) {}
+    rpc GetTodo(TodoCode) returns (Todo) {}
+    rpc ListTodos(TodoCode) returns (stream Todo) {}
     // rpc RecordRoute(stream Point) returns (RouteSummary) {}
     // rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
 }

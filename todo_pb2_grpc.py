@@ -14,13 +14,13 @@ class RouteGuideStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.GetFeature = channel.unary_unary(
-        '/RouteGuide/GetFeature',
+    self.GetTodo = channel.unary_unary(
+        '/RouteGuide/GetTodo',
         request_serializer=todo__pb2.TodoCode.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
-    self.ListFeatures = channel.unary_stream(
-        '/RouteGuide/ListFeatures',
+    self.ListTodos = channel.unary_stream(
+        '/RouteGuide/ListTodos',
         request_serializer=todo__pb2.TodoCode.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
@@ -30,14 +30,14 @@ class RouteGuideServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
-  def GetFeature(self, request, context):
+  def GetTodo(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def ListFeatures(self, request, context):
+  def ListTodos(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -47,13 +47,13 @@ class RouteGuideServicer(object):
 
 def add_RouteGuideServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'GetFeature': grpc.unary_unary_rpc_method_handler(
-          servicer.GetFeature,
+      'GetTodo': grpc.unary_unary_rpc_method_handler(
+          servicer.GetTodo,
           request_deserializer=todo__pb2.TodoCode.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
-      'ListFeatures': grpc.unary_stream_rpc_method_handler(
-          servicer.ListFeatures,
+      'ListTodos': grpc.unary_stream_rpc_method_handler(
+          servicer.ListTodos,
           request_deserializer=todo__pb2.TodoCode.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
