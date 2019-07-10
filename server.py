@@ -6,7 +6,7 @@ import grpc
 import todo_pb2
 import todo_pb2_grpc
 import todo_resources
-from server_helper.server_get_todo_helper import *
+from server_util.server_get_todo_helper import *
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 

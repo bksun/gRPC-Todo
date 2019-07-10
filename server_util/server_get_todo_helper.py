@@ -16,6 +16,7 @@ def get_todo(todo_db, point):
             return todo
     return None
 
+
 class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
     def __init__(self):
         self.db = todo_resources.read_todo_database()
@@ -39,20 +40,29 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
                         )
         self.db.append(new_request)
         print('Server - Addtodo - req:', new_request.id)
-        for feature in self.db:
-            yield feature
+        for todo in self.db:
+            yield todo
 
-    def RemoveTodo(self, request, context):
-        print('Server - Get Todo called..')
-        # self.db.append(request)
+    # def StreamTodos(self, request, context):
+    #     print("inside stream todo")
+    #     for todo in self.db:
+    #             yield todo
+
+    def RemoveTodoHelper(self, request):
         for todo in self.db:
             if todo.id == request:
                 self.db.remove(todo)
 
+    def RemoveTodo(self, request, context):
+        print('Server - Get Todo called..')
+        self.RemoveTodoHelper(request)
+
         print('Server - Addtodo - req:', request)
-        for feature in self.db:
-                yield feature
+        for todo in self.db:
+                yield todo
 
     def ListTodos(self, request, context):
-        for feature in self.db:
-            yield feature
+        print(request)
+        # self.StreamTodos(request, context)
+        for todo in self.db:
+               yield todo        
