@@ -13,32 +13,22 @@ def guide_list_todos(stub):
         print("todo called %s at %s" % (todo.id, todo.msg))
 
 
-def Add_one_todo(stub):
+def Add_one_todo(stub, input_action):
     print('Client - Ready Post Call..')
     # one_todo = todo_pb2.Todo()
     # one_todo.id = 200
     # one_todo.msg = "My message"
 
     todos = stub.AddTodo(todo_pb2.Todo(
-        id=todo_pb2.TodoCode(id=200),
-        msg="my latest message"
+        msg=input_action
     ))
 
     print('Client - Post call over..')
     for todo in todos:
         print("todo: ", todo)
 
-    # if not todo.id:
-    #     print("Server returned incomplete todo")
-    #     return
-
-    # if todo.msg:
-    #     print("todo called %s at %s" % (todo.id, todo.msg))
-    # else:
-    #     print("Found no todo at %s" % todo.id)
-
-def remove_one_todo(stub):
-    todos = stub.RemoveTodo(todo_pb2.TodoCode(id=31))
+def remove_one_todo(stub, input_action):
+    todos = stub.RemoveTodo(todo_pb2.TodoCode(id=input_action))
     print('Printing todos after removal...')
     for todo in todos:
         print("todo: ", todo)
@@ -57,6 +47,6 @@ def guide_get_one_todo(stub, point):
         print("Found no todo at %s" % todo.id)
 
 
-def guide_get_todo(stub):
-    guide_get_one_todo(stub, todo_pb2.TodoCode(id=10))
-    guide_get_one_todo(stub, todo_pb2.TodoCode(id=0))
+def guide_get_todo(stub, user_input):
+    guide_get_one_todo(stub, todo_pb2.TodoCode(id=user_input))
+    # guide_get_one_todo(stub, todo_pb2.TodoCode(id=0))

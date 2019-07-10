@@ -33,10 +33,14 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
     def AddTodo(self, request, context):
         print('Server - Get Todo called..')
         # todo = get_todo(self.db, request)
-        self.db.append(request)
-        print('Server - Addtodo - req:', request)
+        new_request = todo_pb2.Todo(
+                        id=todo_pb2.TodoCode(id=len(self.db)+1),
+                        msg=request.msg
+                        )
+        self.db.append(new_request)
+        print('Server - Addtodo - req:', new_request.id)
         for feature in self.db:
-                yield feature
+            yield feature
 
     def RemoveTodo(self, request, context):
         print('Server - Get Todo called..')
@@ -51,8 +55,4 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
 
     def ListTodos(self, request, context):
         for feature in self.db:
-            # if (feature.location.longitude >= left and
-            #         feature.location.longitude <= right and
-            #         feature.location.latitude >= bottom and
-            #         feature.location.latitude <= top):
-                yield feature
+            yield feature
