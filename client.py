@@ -1,7 +1,7 @@
 from __future__ import print_function
 import random
 import logging
-import grpc
+# import grpc
 import todo_pb2
 import todo_pb2_grpc
 import todo_resources
@@ -23,22 +23,25 @@ def run():
 			user_input = int(input('Please enter your input:'))
 			if user_input == 1:
 				input_action = int(input('Please enter a ID to view:'))
-				print("-------------- Gettodo --------------")
-				client_stub.guide_get_todo(input_action)
+				client_stub.get_todo(input_action)
 			elif user_input == 2:
-				print("-------------- Listtodos --------------")
-				client_stub.guide_list_todos()
+				input_action = int(input('By User: 1, By Status: 2:'))
+				if input_action == 1:
+					username = input('Please enter username:')
+					client_stub.list_todos_by_user(username)
+				else:
+					client_stub.list_todos_by_status()
 			elif user_input == 3:
 				input_action = str(input('Please enter a message to add:'))
-				print("-------------- Add todo --------------")
-				client_stub.Add_one_todo(input_action)
+				client_stub.add_one_todo(input_action)
 			elif user_input == 4:
 				input_action = int(input('Please enter a ID to delete:'))
-				print("-------------- Gettodo --------------")
 				client_stub.remove_one_todo(input_action)
+			elif user_input > 4:
+				raise ValueError
 		except ValueError as ve:
 			print(ve)
-			print('Please enter integer value only.')		
+			print('Please enter value from 1 to 4 only.')		
 
 
 if __name__ == '__main__':

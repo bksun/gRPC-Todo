@@ -14,8 +14,11 @@ def read_todo_database():
     with open("todo_db.json") as todo_db_file:
         for item in json.load(todo_db_file):
             todo = todo_pb2.Todo(
-                id=todo_pb2.TodoCode(id=item["id"]),
-                msg=item["msg"])
+                id=item["id"],
+                text=item["text"],
+                user=todo_pb2.User(name=item["user"]),
+                isdone=item["isdone"],
+                )
             todo_list.append(todo)
            
     return todo_list

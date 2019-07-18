@@ -9,13 +9,14 @@ import todo_resources
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
-def get_todo(todo_db, point):
+def get_todo(todo_db, request):
     """Returns todo at given location or None."""
     for todo in todo_db:
-        if todo.id == point:
+        if todo.id == request.id:
+            todo.status = todo_pb2.SUCCESS
             return todo
-    return None
-
+    request.status = todo_pb2.FAILED
+    return request
 
 class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
     def __init__(self):
@@ -23,46 +24,47 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
         # print(self.db)
 
     def GetTodo(self, request, context):
-        print('Server - Get Todo called..')
         todo = get_todo(self.db, request)
-        print('server - request:', request)
         if todo is None:
-            return todo_pb2.Todo(msg="", id=request)
+            return todo_pb2.Todo(id=request.id)
         else:
             return todo
 
-    def AddTodo(self, request, context):
-        print('Server - Get Todo called..')
-        # todo = get_todo(self.db, request)
-        new_request = todo_pb2.Todo(
-                        id=todo_pb2.TodoCode(id=len(self.db)+1),
-                        msg=request.msg
-                        )
-        self.db.append(new_request)
-        print('Server - Addtodo - req:', new_request.id)
-        for todo in self.db:
-            yield todo
-
-    # def StreamTodos(self, request, context):
-    #     print("inside stream todo")
-    #     for todo in self.db:
-    #             yield todo
+    def AddTodo(self, todo, context):
+        if isinstance(todo, todo_pb2.Todo):
+            todo.id = len(self.db)+1
+            # import ipdb; ipdb.set_trace()
+            self.db.append(todo)
+            todo.status = todo_pb2.SUCCESS
+            return todo
+        else:
+            todo.status = todo_pb2.FAILED
+            return todo
 
     def RemoveTodoHelper(self, request):
         for todo in self.db:
-            if todo.id == request:
-                self.db.remove(todo)
+            if todo.id == request.id:
+                a = self.db.remove(todo)
+                print(a)
 
     def RemoveTodo(self, request, context):
-        print('Server - Get Todo called..')
         self.RemoveTodoHelper(request)
-
         print('Server - Addtodo - req:', request)
-        for todo in self.db:
-                yield todo
+        request.status = todo_pb2.SUCCESS
+        return request
 
-    def ListTodos(self, request, context):
-        print(request)
-        # self.StreamTodos(request, context)
+    def ListTodoByUser(self, request, context):
+        if isinstance(request, todo_pb2.User):
+            for todo in self.db:
+                if todo.user.name ==  request.name:
+                    todo.status = todo_pb2.SUCCESS
+                    yield todo
+                else:
+                    pass
+
+    def ListTodoByStatus(self, request, context):
         for todo in self.db:
-               yield todo        
+            if todo.isdone == False:
+                yield todo
+            else:
+                print(todo.isdone)

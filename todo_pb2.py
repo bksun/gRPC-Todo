@@ -4,6 +4,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -20,43 +21,46 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\ntodo.proto\"D\n\x04Mode\x12\x17\n\x02id\x18\x01 \x01(\x0e\x32\x0b.Mode.State\"#\n\x05State\x12\r\n\tCOMPLETED\x10\x00\x12\x0b\n\x07YETTODO\x10\x01\"\x16\n\x08TodoCode\x12\n\n\x02id\x18\x01 \x01(\x05\"*\n\x04Todo\x12\x15\n\x02id\x18\x01 \x01(\x0b\x32\t.TodoCode\x12\x0b\n\x03msg\x18\x02 \x01(\t2\x8b\x01\n\nRouteGuide\x12\x1d\n\x07GetTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x12\x1d\n\tListTodos\x12\x05.Mode\x1a\x05.Todo\"\x00\x30\x01\x12\x1b\n\x07\x41\x64\x64Todo\x12\x05.Todo\x1a\x05.Todo\"\x00\x30\x01\x12\"\n\nRemoveTodo\x12\t.TodoCode\x1a\x05.Todo\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\ntodo.proto\"#\n\x06Status\x12\x19\n\x04stat\x18\x01 \x01(\x0e\x32\x0b.StatusType\"=\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x1b\n\x06status\x18\x03 \x01(\x0e\x32\x0b.StatusType\"b\n\x04Todo\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x0e\n\x06isdone\x18\x03 \x01(\x08\x12\x13\n\x04user\x18\x04 \x01(\x0b\x32\x05.User\x12\x1b\n\x06status\x18\x05 \x01(\x0e\x32\x0b.StatusType*%\n\nStatusType\x12\n\n\x06\x46\x41ILED\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x32\xac\x01\n\nRouteGuide\x12\x19\n\x07GetTodo\x12\x05.Todo\x1a\x05.Todo\"\x00\x12\"\n\x0eListTodoByUser\x12\x05.User\x1a\x05.Todo\"\x00\x30\x01\x12&\n\x10ListTodoByStatus\x12\x07.Status\x1a\x05.Todo\"\x00\x30\x01\x12\x19\n\x07\x41\x64\x64Todo\x12\x05.Todo\x1a\x05.Todo\"\x00\x12\x1c\n\nRemoveTodo\x12\x05.Todo\x1a\x05.Todo\"\x00\x62\x06proto3')
 )
 
-
-
-_MODE_STATE = _descriptor.EnumDescriptor(
-  name='State',
-  full_name='Mode.State',
+_STATUSTYPE = _descriptor.EnumDescriptor(
+  name='StatusType',
+  full_name='StatusType',
   filename=None,
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='COMPLETED', index=0, number=0,
+      name='FAILED', index=0, number=0,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='YETTODO', index=1, number=1,
+      name='SUCCESS', index=1, number=1,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=47,
-  serialized_end=82,
+  serialized_start=214,
+  serialized_end=251,
 )
-_sym_db.RegisterEnumDescriptor(_MODE_STATE)
+_sym_db.RegisterEnumDescriptor(_STATUSTYPE)
+
+StatusType = enum_type_wrapper.EnumTypeWrapper(_STATUSTYPE)
+FAILED = 0
+SUCCESS = 1
 
 
-_MODE = _descriptor.Descriptor(
-  name='Mode',
-  full_name='Mode',
+
+_STATUS = _descriptor.Descriptor(
+  name='Status',
+  full_name='Status',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='Mode.id', index=0,
+      name='stat', full_name='Status.stat', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -67,7 +71,6 @@ _MODE = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _MODE_STATE,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -76,20 +79,34 @@ _MODE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=82,
+  serialized_end=49,
 )
 
 
-_TODOCODE = _descriptor.Descriptor(
-  name='TodoCode',
-  full_name='TodoCode',
+_USER = _descriptor.Descriptor(
+  name='User',
+  full_name='User',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='TodoCode.id', index=0,
+      name='id', full_name='User.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='User.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='User.status', index=2,
+      number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -106,8 +123,8 @@ _TODOCODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=84,
-  serialized_end=106,
+  serialized_start=51,
+  serialized_end=112,
 )
 
 
@@ -120,15 +137,36 @@ _TODO = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='id', full_name='Todo.id', index=0,
-      number=1, type=11, cpp_type=10, label=1,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='text', full_name='Todo.text', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='isdone', full_name='Todo.isdone', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='user', full_name='Todo.user', index=3,
+      number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='msg', full_name='Todo.msg', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='status', full_name='Todo.status', index=4,
+      number=5, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -144,31 +182,33 @@ _TODO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=108,
-  serialized_end=150,
+  serialized_start=114,
+  serialized_end=212,
 )
 
-_MODE.fields_by_name['id'].enum_type = _MODE_STATE
-_MODE_STATE.containing_type = _MODE
-_TODO.fields_by_name['id'].message_type = _TODOCODE
-DESCRIPTOR.message_types_by_name['Mode'] = _MODE
-DESCRIPTOR.message_types_by_name['TodoCode'] = _TODOCODE
+_STATUS.fields_by_name['stat'].enum_type = _STATUSTYPE
+_USER.fields_by_name['status'].enum_type = _STATUSTYPE
+_TODO.fields_by_name['user'].message_type = _USER
+_TODO.fields_by_name['status'].enum_type = _STATUSTYPE
+DESCRIPTOR.message_types_by_name['Status'] = _STATUS
+DESCRIPTOR.message_types_by_name['User'] = _USER
 DESCRIPTOR.message_types_by_name['Todo'] = _TODO
+DESCRIPTOR.enum_types_by_name['StatusType'] = _STATUSTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-Mode = _reflection.GeneratedProtocolMessageType('Mode', (_message.Message,), {
-  'DESCRIPTOR' : _MODE,
+Status = _reflection.GeneratedProtocolMessageType('Status', (_message.Message,), {
+  'DESCRIPTOR' : _STATUS,
   '__module__' : 'todo_pb2'
-  # @@protoc_insertion_point(class_scope:Mode)
+  # @@protoc_insertion_point(class_scope:Status)
   })
-_sym_db.RegisterMessage(Mode)
+_sym_db.RegisterMessage(Status)
 
-TodoCode = _reflection.GeneratedProtocolMessageType('TodoCode', (_message.Message,), {
-  'DESCRIPTOR' : _TODOCODE,
+User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), {
+  'DESCRIPTOR' : _USER,
   '__module__' : 'todo_pb2'
-  # @@protoc_insertion_point(class_scope:TodoCode)
+  # @@protoc_insertion_point(class_scope:User)
   })
-_sym_db.RegisterMessage(TodoCode)
+_sym_db.RegisterMessage(User)
 
 Todo = _reflection.GeneratedProtocolMessageType('Todo', (_message.Message,), {
   'DESCRIPTOR' : _TODO,
@@ -185,31 +225,40 @@ _ROUTEGUIDE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=153,
-  serialized_end=292,
+  serialized_start=254,
+  serialized_end=426,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetTodo',
     full_name='RouteGuide.GetTodo',
     index=0,
     containing_service=None,
-    input_type=_TODOCODE,
+    input_type=_TODO,
     output_type=_TODO,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='ListTodos',
-    full_name='RouteGuide.ListTodos',
+    name='ListTodoByUser',
+    full_name='RouteGuide.ListTodoByUser',
     index=1,
     containing_service=None,
-    input_type=_MODE,
+    input_type=_USER,
+    output_type=_TODO,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListTodoByStatus',
+    full_name='RouteGuide.ListTodoByStatus',
+    index=2,
+    containing_service=None,
+    input_type=_STATUS,
     output_type=_TODO,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='AddTodo',
     full_name='RouteGuide.AddTodo',
-    index=2,
+    index=3,
     containing_service=None,
     input_type=_TODO,
     output_type=_TODO,
@@ -218,9 +267,9 @@ _ROUTEGUIDE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='RemoveTodo',
     full_name='RouteGuide.RemoveTodo',
-    index=3,
+    index=4,
     containing_service=None,
-    input_type=_TODOCODE,
+    input_type=_TODO,
     output_type=_TODO,
     serialized_options=None,
   ),

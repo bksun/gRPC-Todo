@@ -9,51 +9,46 @@ import todo_resources
 
 class ClientStub:
 		def __init__(self):
-			
 			channel = grpc.insecure_channel('localhost:50051')
 			stub = todo_pb2_grpc.RouteGuideStub(channel)
 			self.stub = stub
 			print('Client stub initialized..')
 
-		def guide_list_todos(self):
-			print('List Todo called..')
-			list_todos = todo_pb2.Mode(id = 1)
-			print("inside guide_list" , list_todos)
-			todos = self.stub.ListTodos(list_todos)
+		def list_todos_by_status(self):
+			list_todos = todo_pb2.Todo(isdone = True)
+			todos = self.stub.ListTodoByStatus(list_todos)
 			for todo in todos:
-				print("todo called %s at %s" % (todo.id, todo.msg))
+				print("todo with %s and %s" % (todo.id, todo.text))
 
+		def list_todos_by_user(self, username):
+			list_todos = todo_pb2.User(name=username)
+			todos = self.stub.ListTodoByUser(list_todos)
+			for todo in todos:
+				print("todo with %s and %s" % (todo.id, todo.text))
 
-		def Add_one_todo(self, input_action):
-			print('Client - Ready Post Call..')
-
-			todos = self.stub.AddTodo(todo_pb2.Todo(
-				msg=input_action
+		def add_one_todo(self, input_action):
+			todo = self.stub.AddTodo(
+				todo_pb2.Todo(
+				text=input_action,
+				user=todo_pb2.User(name="sksun"),
+				isdone=False
 			))
-
-			print('Client - Post call over..')
-			for todo in todos:
-				print("todo: ", todo)
+			if todo.status == todo_pb2.FAILED:
+				print("FAILED: todo not added!", todo)
+			else:
+				print("todo added with %s and %s" % (todo.id, todo.text))
 
 		def remove_one_todo(self, input_action):
-			todos = self.stub.RemoveTodo(todo_pb2.TodoCode(id=input_action))
-			print('Printing todos after removal...')
-			for todo in todos:
-				print("todo: ", todo)
+			todo = self.stub.RemoveTodo(todo_pb2.Todo(id=input_action))
+			print("todo with id: %s removed" % (todo.id))
 
-		def guide_get_one_todo(self, point):
-			print('Client - Ready for GetTodo called..')
+		def get_one_todo_util(self, point):
 			todo = self.stub.GetTodo(point)
-			print('Client - GetTodo called..')
-			if not todo.id:
+			if todo.status == todo_pb2.FAILED:
 				print("Server returned incomplete todo")
-				return
-
-			if todo.msg:
-				print("todo called %s at %s" % (todo.id, todo.msg))
 			else:
-				print("Found no todo at %s" % todo.id)
+				print("todo called %s at %s" % (todo.id, todo.text))
 
-		def guide_get_todo(self, user_input):
-			self.guide_get_one_todo(todo_pb2.TodoCode(id=user_input))
+		def get_todo(self, user_input):
+			self.get_one_todo_util(todo_pb2.Todo(id=user_input))
 

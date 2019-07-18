@@ -16,22 +16,27 @@ class RouteGuideStub(object):
     """
     self.GetTodo = channel.unary_unary(
         '/RouteGuide/GetTodo',
-        request_serializer=todo__pb2.TodoCode.SerializeToString,
+        request_serializer=todo__pb2.Todo.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
-    self.ListTodos = channel.unary_stream(
-        '/RouteGuide/ListTodos',
-        request_serializer=todo__pb2.Mode.SerializeToString,
+    self.ListTodoByUser = channel.unary_stream(
+        '/RouteGuide/ListTodoByUser',
+        request_serializer=todo__pb2.User.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
-    self.AddTodo = channel.unary_stream(
+    self.ListTodoByStatus = channel.unary_stream(
+        '/RouteGuide/ListTodoByStatus',
+        request_serializer=todo__pb2.Status.SerializeToString,
+        response_deserializer=todo__pb2.Todo.FromString,
+        )
+    self.AddTodo = channel.unary_unary(
         '/RouteGuide/AddTodo',
         request_serializer=todo__pb2.Todo.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
-    self.RemoveTodo = channel.unary_stream(
+    self.RemoveTodo = channel.unary_unary(
         '/RouteGuide/RemoveTodo',
-        request_serializer=todo__pb2.TodoCode.SerializeToString,
+        request_serializer=todo__pb2.Todo.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
 
@@ -47,7 +52,14 @@ class RouteGuideServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def ListTodos(self, request, context):
+  def ListTodoByUser(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListTodoByStatus(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -73,22 +85,27 @@ def add_RouteGuideServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'GetTodo': grpc.unary_unary_rpc_method_handler(
           servicer.GetTodo,
-          request_deserializer=todo__pb2.TodoCode.FromString,
+          request_deserializer=todo__pb2.Todo.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
-      'ListTodos': grpc.unary_stream_rpc_method_handler(
-          servicer.ListTodos,
-          request_deserializer=todo__pb2.Mode.FromString,
+      'ListTodoByUser': grpc.unary_stream_rpc_method_handler(
+          servicer.ListTodoByUser,
+          request_deserializer=todo__pb2.User.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
-      'AddTodo': grpc.unary_stream_rpc_method_handler(
+      'ListTodoByStatus': grpc.unary_stream_rpc_method_handler(
+          servicer.ListTodoByStatus,
+          request_deserializer=todo__pb2.Status.FromString,
+          response_serializer=todo__pb2.Todo.SerializeToString,
+      ),
+      'AddTodo': grpc.unary_unary_rpc_method_handler(
           servicer.AddTodo,
           request_deserializer=todo__pb2.Todo.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
-      'RemoveTodo': grpc.unary_stream_rpc_method_handler(
+      'RemoveTodo': grpc.unary_unary_rpc_method_handler(
           servicer.RemoveTodo,
-          request_deserializer=todo__pb2.TodoCode.FromString,
+          request_deserializer=todo__pb2.Todo.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
   }

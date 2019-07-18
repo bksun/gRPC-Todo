@@ -2,27 +2,32 @@ syntax = "proto3";
 
 
 service RouteGuide {
-    rpc GetTodo(TodoCode) returns (Todo) {}
-    rpc ListTodos(Mode) returns (stream Todo) {}
-    rpc AddTodo(Todo) returns (stream Todo) {}
-    rpc RemoveTodo(TodoCode) returns (stream Todo) {}
-    // rpc RecordRoute(stream Point) returns (RouteSummary) {}
-    // rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
+    rpc GetTodo(Todo) returns (Todo) {}
+    rpc ListTodoByUser(User) returns (stream Todo) {}
+    rpc ListTodoByStatus(Status) returns (stream Todo) {}
+    rpc AddTodo(Todo) returns (Todo) {}
+    rpc RemoveTodo(Todo) returns (Todo) {}
 }
 
-message Mode {
-    enum State {
-      COMPLETED = 0;
-      YETTODO   = 1;
-    }
-    State id = 1;
+enum StatusType {
+    FAILED = 0;
+    SUCCESS = 1;
 }
 
-message TodoCode {
+message Status {
+    StatusType stat = 1;
+}
+
+message User {
     int32 id = 1;
+    string name = 2;
+    StatusType status = 3;
 }
 
 message Todo {
-    TodoCode id = 1;
-    string msg = 2;
+    int32 id = 1;
+    string text = 2;
+    bool isdone = 3;
+    User user = 4;
+    StatusType status = 5;
 }
