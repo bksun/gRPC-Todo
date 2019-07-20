@@ -18,13 +18,13 @@ class ClientStub:
 			list_todos = todo_pb2.Todo(isdone = True)
 			todos = self.stub.ListTodoByStatus(list_todos)
 			for todo in todos:
-				print("todo with %s and %s" % (todo.id, todo.text))
+				print("todo added with %s, %s, %s" % (todo.id, todo.text, todo.user.name))
 
 		def list_todos_by_user(self, username):
 			list_todos = todo_pb2.User(name=username)
 			todos = self.stub.ListTodoByUser(list_todos)
 			for todo in todos:
-				print("todo with %s and %s" % (todo.id, todo.text))
+				print("todo added with %s, %s, %s" % (todo.id, todo.text, todo.user.name))
 
 		def add_one_todo(self, input_action):
 			todo = self.stub.AddTodo(
@@ -40,7 +40,10 @@ class ClientStub:
 
 		def remove_one_todo(self, input_action):
 			todo = self.stub.RemoveTodo(todo_pb2.Todo(id=input_action))
-			print("todo with id: %s removed" % (todo.id))
+			if todo.status == todo_pb2.SUCCESS:
+				print("todo with id: %s removed" % (todo.id))
+			else:
+				print("todo not removed")
 
 		def get_one_todo_util(self, point):
 			todo = self.stub.GetTodo(point)
