@@ -31,7 +31,8 @@ class ClientStub:
 				todo_pb2.Todo(
 				text=input_action,
 				user=todo_pb2.User(name="sksun"),
-				isdone=False
+				isdone=False,
+				status=todo_pb2.SUCCESS
 			))
 			if todo.status == todo_pb2.FAILED:
 				print("FAILED: todo not added!", todo)
@@ -41,12 +42,13 @@ class ClientStub:
 		def remove_one_todo(self, input_action):
 			todo = self.stub.RemoveTodo(todo_pb2.Todo(id=input_action))
 			if todo.status == todo_pb2.SUCCESS:
-				print("todo with id: %s removed" % (todo.id))
+				print("todo with id: %s removed" % (input_action))
 			else:
 				print("todo not removed")
 
 		def get_one_todo_util(self, point):
 			todo = self.stub.GetTodo(point)
+			print(todo)
 			if todo.status == todo_pb2.FAILED:
 				print("Server returned incomplete todo")
 			else:
@@ -54,4 +56,3 @@ class ClientStub:
 
 		def get_todo(self, user_input):
 			self.get_one_todo_util(todo_pb2.Todo(id=user_input))
-

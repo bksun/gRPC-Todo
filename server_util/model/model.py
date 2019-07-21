@@ -25,8 +25,8 @@ class Todo(Base):
     user = relationship(User)
 # Create an engine that stores data in the local directory's
 # sqlalchemy_example.db file.
-engine = create_engine('sqlite:///TodoApp-DB.db')
+# engine = create_engine('sqlite:///TodoApp-DB.db')
  
 # Create all tables in the engine. This is equivalent to "Create Table"
 # statements in raw SQL.
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)
