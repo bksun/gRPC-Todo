@@ -1,9 +1,0 @@
-import sqlite3 as lite
-lite.connect('TodoApp-DB.db')
-con = lite.connect('TodoApp-DB.db')
-cur = con.cursor()
-    ^
-IndentationError: unexpected indent
->>>
->>> cur = con.cursor()
->>> cur.execute('SELECT SQLITE_VERSION()')

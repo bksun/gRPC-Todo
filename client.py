@@ -22,7 +22,7 @@ def run():
 		try:
 			user_input = int(input('Please enter your input:'))
 			if user_input == 1:
-				input_action = int(input('Please enter a ID to view:'))
+				input_action = int(input('Please enter an ID to view:'))
 				client_stub.get_todo(input_action)
 			elif user_input == 2:
 				input_action = int(input('By User: 1, By Status: 2:'))
@@ -30,10 +30,12 @@ def run():
 					username = input('Please enter username:')
 					client_stub.list_todos_by_user(username)
 				else:
-					client_stub.list_todos_by_status()
+					status = int(input('Please enter stastus(READ-1, UNREAD-0):'))
+					client_stub.list_todos_by_status(status)
 			elif user_input == 3:
 				input_action = str(input('Please enter a message to add:'))
-				client_stub.add_one_todo(input_action)
+				username = str(input('Please enter the username:'))
+				client_stub.add_one_todo(input_action, username)
 			elif user_input == 4:
 				input_action = int(input('Please enter a ID to delete:'))
 				client_stub.remove_one_todo(input_action)

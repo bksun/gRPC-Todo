@@ -8,9 +8,11 @@ import todo_pb2_grpc
 import todo_resources
 from sqlalchemy.orm import exc
 
-from server_util.model.DAL import dal
+from server_util.model.dal import dal
+from server_util.server_util_functions import utils
 from server_util.model.model import Todo, User
 
+DEFAULT_USER = "sksun"
 
 class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
     def __init__(self, db_session=None):
@@ -21,19 +23,11 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
             dal.connect()
             self.session = dal.Session()
     
-    def get_todo(self, request):
-        """Returns todo at given location or None."""
-        todo = self.session.query(Todo).filter(Todo.id==request.id).one()
-        if todo.id == request.id:
-            return todo
-        return request
-
     def GetTodo(self, request, context):
-        todo = self.get_todo(request)
-        if todo is None:
+        todo = utils.get_one_todo(request)
+        if todo.status != todo_pb2.SUCCESS:
             return todo_pb2.Todo(id=request.id, status=todo_pb2.FAILED)
         else:
-            todo.status = todo_pb2.SUCCESS
             todo = self.ConvertTodoModelTogRPC(todo)
             todo.status = todo_pb2.SUCCESS
             return todo
@@ -41,21 +35,24 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
     def AddTodo(self, todo, context):
         if isinstance(todo, todo_pb2.Todo):
             import ipdb; ipdb.set_trace()
-            user = self.session.query(User).filter(User.name==todo.user.name).one()
-            
-            if isinstance(user, User):
-                    new_todo = Todo(
-                    text=todo.text,
-                    isdone=todo.isdone,
-                    user=user
-                    )
-                    # print(new_todo.text, new_todo.isdone, new_todo.user.name)
-                    self.session.add(new_todo)
-                    self.session.commit()
-            elif user is None:
-                user = User(name="sksun")
-            todo.status = todo_pb2.SUCCESS
-            return todo
+            try:
+                user = self.session.query(User).filter(User.name==todo.user.name).one()
+            except exc.NoResultFound:
+                user = User(name=todo.user.name)
+            finally:
+                if isinstance(user, User):
+                        new_todo = Todo(
+                        text=todo.text,
+                        isdone=todo.isdone,
+                        user=user
+                        )
+                        self.session.add(new_todo)
+                        self.session.commit()
+                        todo.status = todo_pb2.SUCCESS
+                        return todo
+                elif user is None:
+                    user = User(name=DEFAULT_USER)
+                return todo
         else:
             todo.status = todo_pb2.FAILED
             return todo
@@ -77,7 +74,7 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
             self.session.commit()
             todo.status = todo_pb2.SUCCESS
             return todo
-        except exe.NoResultFound:
+        except exc.NoResultFound:
             return todo_pb2.Todo(status=todo_pb2.FAILED)
 
     def RemoveTodo(self, request, context):
@@ -91,21 +88,22 @@ class RouteGuideServicer(todo_pb2_grpc.RouteGuideServicer):
     def ListTodoByUser(self, request, context):
         import ipdb; ipdb.set_trace()
         if isinstance(request, todo_pb2.User):
-            user = self.session.query(User).filter(User.name==request.name).one()
-            # for user in users:
-            #     self.session.delete(user)
-            #     self.session.commit()
-            todos = self.session.query(Todo).filter(Todo.user==user).all()
-            # for user in todos:
-            #     self.session.delete(user)
-            #     self.session.commit()
-            for todo in todos:
-                todo =  self.ConvertTodoModelTogRPC(todo)
+            try:
+                username = request.name
+                todos = utils.list_by_user(username)
+                for todo in todos:
+                    todo =  self.ConvertTodoModelTogRPC(todo)
+                    todo.status = todo_pb2.SUCCESS
+                    yield todo
+            except exc.NoResultFound:
+                todo = todo_pb2.Todo(status=todo_pb2.FAILED)
                 yield todo
 
     def ListTodoByStatus(self, request, context):
         import ipdb; ipdb.set_trace()
-        todos = self.session.query(Todo).filter(Todo.isdone==False)
+        # status = request.isdone
+        status = True
+        todos = utils.list_by_status(status)
         for todo in todos:
             todo = self.ConvertTodoModelTogRPC(todo)
             yield todo
